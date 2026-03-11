@@ -6,7 +6,7 @@
 // ─── CONFIGURACIÓN ───────────────────────────────────────────
 // ⭐ IMPORTANTE: Pega aquí tu URL de Google Apps Script
 // (Te la doy en las instrucciones paso a paso)
-const APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbz3PeZjPA_Xgz72EwVVyjZbmZLLWVc3JjsMJVztEHCqGBh1MeJpTt3p1YusL0RA7GMu/exec';
+const APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbxT7xab_0CwaU5pG6E0Ct6R0I8LrOecJlqkr8gizdVZ9Zv_PEqZY7QSeOW91zQfJAvw/exec';
 
 // ─────────────────────────────────────────────────────────────
 
