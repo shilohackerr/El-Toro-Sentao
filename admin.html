@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="robots" content="noindex, nofollow" />
+  <title>Panel Admin — Toro Sentao</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=Lato:wght@300;400;700&family=Cinzel:wght@700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/style.css" />
+  <link rel="stylesheet" href="css/admin.css" />
+  <link rel="icon" href="images/favicon.svg" type="image/svg+xml" />
+</head>
+<body class="page-admin">
+
+  <!-- ══ LOGIN SCREEN ══════════════════════════════════════ -->
+  <div class="login-screen" id="loginScreen">
+    <div class="login-box">
+      <div class="login-logo">🐂</div>
+      <h1 class="login-title">TORO <em>SENTAO</em></h1>
+      <p class="login-sub">Panel de Administración</p>
+
+      <div class="login-form">
+        <div class="form-group">
+          <label for="adminPass">Contraseña</label>
+          <input type="password" id="adminPass" placeholder="••••••••"
+                 autocomplete="current-password" />
+        </div>
+        <div class="login-error" id="loginError">Contraseña incorrecta</div>
+        <button class="btn-login" id="loginBtn">Entrar al Panel</button>
+      </div>
+
+      <a href="index.html" class="login-back">← Volver al sitio</a>
+    </div>
+  </div>
+
+  <!-- ══ PANEL PRINCIPAL ═══════════════════════════════════ -->
+  <div class="admin-panel" id="adminPanel" style="display:none">
+
+    <!-- Sidebar -->
+    <aside class="admin-sidebar" id="adminSidebar">
+      <div class="sidebar-logo">
+        <span>🐂</span>
+        <div>
+          <strong>TORO SENTAO</strong>
+          <small>Panel Admin</small>
+        </div>
+      </div>
+
+      <nav class="sidebar-nav">
+        <button class="sidebar-link active" data-view="reservaciones">
+          📋 Reservaciones
+        </button>
+        <button class="sidebar-link" data-view="hoy">
+          📅 Hoy
+        </button>
+        <button class="sidebar-link" data-view="stats">
+          📊 Resumen
+        </button>
+      </nav>
+
+      <div class="sidebar-footer">
+        <button class="btn-logout" id="logoutBtn">Cerrar sesión</button>
+        <a href="index.html" class="sidebar-site-link" target="_blank">
+          Ver sitio →
+        </a>
+      </div>
+    </aside>
+
+    <!-- Contenido principal -->
+    <main class="admin-main">
+
+      <!-- Header -->
+      <header class="admin-header">
+        <button class="sidebar-toggle" id="sidebarToggle">☰</button>
+        <div class="admin-header-info">
+          <h2 id="viewTitle">Reservaciones</h2>
+          <span id="adminDate"></span>
+        </div>
+        <button class="btn-nueva-reserva" onclick="window.open('reservaciones.html','_blank')">
+          + Nueva Reserva
+        </button>
+      </header>
+
+      <!-- ── Vista: TODAS LAS RESERVACIONES ── -->
+      <section class="admin-view active" id="view-reservaciones">
+
+        <!-- Filtros y búsqueda -->
+        <div class="admin-toolbar">
+          <div class="search-wrap">
+            <span class="search-icon">🔍</span>
+            <input type="text" id="searchInput" placeholder="Buscar por nombre o teléfono..." />
+          </div>
+          <div class="filter-wrap">
+            <select id="filterEstado">
+              <option value="all">Todos los estados</option>
+              <option value="Pendiente">Pendiente</option>
+              <option value="Confirmada">Confirmada</option>
+              <option value="Cancelada">Cancelada</option>
+              <option value="Completada">Completada</option>
+            </select>
+            <select id="filterFecha">
+              <option value="all">Todas las fechas</option>
+              <option value="hoy">Hoy</option>
+              <option value="manana">Mañana</option>
+              <option value="semana">Esta semana</option>
+            </select>
+          </div>
+          <button class="btn-export" id="exportBtn" title="Exportar a CSV">
+            📥 Exportar
+          </button>
+        </div>
+
+        <!-- Tabla de reservaciones -->
+        <div class="table-wrap">
+          <table class="reserva-table" id="reservaTable">
+            <thead>
+              <tr>
+                <th>#</th>
+                <th>Cliente</th>
+                <th>Fecha & Hora</th>
+                <th>Personas</th>
+                <th>Ocasión</th>
+                <th>Estado</th>
+                <th>Acciones</th>
+              </tr>
+            </thead>
+            <tbody id="reservaTableBody">
+              <!-- Renderizado por JS -->
+            </tbody>
+          </table>
+          <div class="table-empty" id="tableEmpty" style="display:none">
+            <span>📋</span>
+            <p>No hay reservaciones que mostrar.</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- ── Vista: HOY ── -->
+      <section class="admin-view" id="view-hoy">
+        <div class="hoy-stats" id="hoyStats"></div>
+        <div class="hoy-list" id="hoyList"></div>
+      </section>
+
+      <!-- ── Vista: RESUMEN / STATS ── -->
+      <section class="admin-view" id="view-stats">
+        <div class="stats-grid" id="statsGrid"></div>
+      </section>
+
+    </main>
+  </div>
+
+  <!-- ══ MODAL DETALLE RESERVACIÓN ════════════════════════ -->
+  <div class="modal-overlay" id="modalOverlay" style="display:none">
+    <div class="modal-box" id="modalBox">
+      <button class="modal-close" id="modalClose">✕</button>
+      <div id="modalContent"></div>
+    </div>
+  </div>
+
+  <!-- ══ TOAST NOTIFICACIÓN ════════════════════════════════ -->
+  <div class="toast" id="toast"></div>
+
+  <script src="js/data.js"></script>
+  <script src="js/admin.js"></script>
+</body>
+</html>
