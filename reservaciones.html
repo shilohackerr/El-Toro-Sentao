@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Reserva tu mesa en Toro Sentao — Vía Volcán, Tierras Altas, Chiriquí." />
+  <title>Reservar Mesa — Toro Sentao</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=Lato:wght@300;400;700&family=Cinzel:wght@700;900&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/style.css" />
+  <link rel="stylesheet" href="css/reservaciones.css" />
+  <link rel="icon" href="images/favicon.svg" type="image/svg+xml" />
+</head>
+<body class="page-reserva">
+
+  <!-- NAVBAR -->
+  <nav class="navbar scrolled" id="navbar">
+    <div class="nav-container">
+      <a href="index.html" class="nav-logo">
+        <span class="logo-icon">🐂</span>
+        <span class="logo-text">TORO <em>SENTAO</em></span>
+      </a>
+      <ul class="nav-links" id="navLinks">
+        <li><a href="index.html#inicio"       class="nav-link">Inicio</a></li>
+        <li><a href="index.html#esencia"      class="nav-link">Nosotros</a></li>
+        <li><a href="index.html#menu"         class="nav-link">Menú</a></li>
+        <li><a href="index.html#testimonios"  class="nav-link">Opiniones</a></li>
+        <li><a href="index.html#contacto"     class="nav-link">Contacto</a></li>
+        <li><a href="reservaciones.html"      class="nav-cta active-page">Reservar Mesa</a></li>
+      </ul>
+      <button class="hamburger" id="hamburger" aria-label="Abrir menú">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </nav>
+
+  <!-- HERO RESERVA -->
+  <section class="reserva-hero">
+    <div class="reserva-hero-content">
+      <p class="section-pretitle">Mesa para ti</p>
+      <h1 class="reserva-hero-title">Reserva tu<br/><em>Experiencia</em></h1>
+      <p class="reserva-hero-sub">Asegura tu lugar en la mejor parrilla de Chiriquí.</p>
+    </div>
+  </section>
+
+  <!-- FORMULARIO + INFO -->
+  <section class="reserva-main">
+    <div class="reserva-layout">
+
+      <!-- ── FORMULARIO ── -->
+      <div class="reserva-form-wrap">
+        <div class="form-header">
+          <h2>Completa tu Reservación</h2>
+          <p>Te confirmaremos por WhatsApp en menos de 2 horas.</p>
+        </div>
+
+        <!-- Estado: inicial (oculto por defecto, JS lo muestra) -->
+        <div class="form-status success" id="formSuccess">
+          <div class="status-icon">✅</div>
+          <h3>¡Reservación Recibida!</h3>
+          <p>Gracias <strong id="successName"></strong>. Te confirmaremos por WhatsApp al <strong id="successTel"></strong> en menos de 2 horas.</p>
+          <a href="index.html" class="btn-primary">Volver al inicio</a>
+        </div>
+
+        <div class="form-status error" id="formError">
+          <div class="status-icon">⚠️</div>
+          <h3>Algo salió mal</h3>
+          <p id="errorMsg">Hubo un error al enviar. Por favor intenta de nuevo o contáctanos por WhatsApp.</p>
+          <button class="btn-outline" id="retryBtn">Intentar de nuevo</button>
+        </div>
+
+        <form id="reservaForm" novalidate>
+
+          <!-- Fila 1: Nombre + Teléfono -->
+          <div class="form-row">
+            <div class="form-group">
+              <label for="nombre">Nombre completo <span class="req">*</span></label>
+              <input type="text" id="nombre" name="nombre"
+                     placeholder="Ej: Carlos Martínez"
+                     autocomplete="name" required />
+              <span class="field-error" id="err-nombre"></span>
+            </div>
+            <div class="form-group">
+              <label for="telefono">WhatsApp / Teléfono <span class="req">*</span></label>
+              <input type="tel" id="telefono" name="telefono"
+                     placeholder="Ej: 6000-0000"
+                     autocomplete="tel" required />
+              <span class="field-error" id="err-telefono"></span>
+            </div>
+          </div>
+
+          <!-- Fila 2: Fecha + Hora -->
+          <div class="form-row">
+            <div class="form-group">
+              <label for="fecha">Fecha <span class="req">*</span></label>
+              <input type="date" id="fecha" name="fecha" required />
+              <span class="field-error" id="err-fecha"></span>
+            </div>
+            <div class="form-group">
+              <label for="hora">Hora <span class="req">*</span></label>
+              <select id="hora" name="hora" required>
+                <option value="">Selecciona una hora</option>
+                <option value="12:00 PM">12:00 PM</option>
+                <option value="12:30 PM">12:30 PM</option>
+                <option value="01:00 PM">01:00 PM</option>
+                <option value="01:30 PM">01:30 PM</option>
+                <option value="02:00 PM">02:00 PM</option>
+                <option value="02:30 PM">02:30 PM</option>
+                <option value="03:00 PM">03:00 PM</option>
+                <option value="03:30 PM">03:30 PM</option>
+                <option value="04:00 PM">04:00 PM</option>
+                <option value="04:30 PM">04:30 PM</option>
+                <option value="05:00 PM">05:00 PM</option>
+                <option value="05:30 PM">05:30 PM</option>
+                <option value="06:00 PM">06:00 PM</option>
+                <option value="06:30 PM">06:30 PM</option>
+                <option value="07:00 PM">07:00 PM</option>
+                <option value="07:30 PM">07:30 PM</option>
+              </select>
+              <span class="field-error" id="err-hora"></span>
+            </div>
+          </div>
+
+          <!-- Fila 3: Personas + Ocasión -->
+          <div class="form-row">
+            <div class="form-group">
+              <label for="personas">Número de personas <span class="req">*</span></label>
+              <select id="personas" name="personas" required>
+                <option value="">¿Cuántos son?</option>
+                <option value="1">1 persona</option>
+                <option value="2">2 personas</option>
+                <option value="3">3 personas</option>
+                <option value="4">4 personas</option>
+                <option value="5">5 personas</option>
+                <option value="6">6 personas</option>
+                <option value="7-10">7 a 10 personas</option>
+                <option value="11-20">11 a 20 personas (grupo)</option>
+                <option value="20+">Más de 20 (evento)</option>
+              </select>
+              <span class="field-error" id="err-personas"></span>
+            </div>
+            <div class="form-group">
+              <label for="ocasion">Ocasión especial</label>
+              <select id="ocasion" name="ocasion">
+                <option value="Visita regular">Visita regular</option>
+                <option value="Cumpleaños">🎂 Cumpleaños</option>
+                <option value="Aniversario">💑 Aniversario</option>
+                <option value="Reunión familiar">👨‍👩‍👧 Reunión familiar</option>
+                <option value="Reunión de negocios">💼 Reunión de negocios</option>
+                <option value="Despedida">🥂 Despedida</option>
+                <option value="Otro">Otro evento</option>
+              </select>
+            </div>
+          </div>
+
+          <!-- Notas -->
+          <div class="form-group full-width">
+            <label for="notas">Notas adicionales</label>
+            <textarea id="notas" name="notas" rows="3"
+              placeholder="Alergias, preferencias de mesa, decoración especial..."></textarea>
+          </div>
+
+          <!-- Aviso -->
+          <div class="form-aviso">
+            <span>ℹ️</span>
+            <p>Al enviar confirmas que leíste nuestra <strong>política de reservaciones</strong>: cancelaciones con menos de 2 horas de anticipación pueden perder la mesa.</p>
+          </div>
+
+          <!-- Botón submit -->
+          <button type="submit" class="btn-submit" id="submitBtn">
+            <span class="btn-text">Confirmar Reservación 🍖</span>
+            <span class="btn-loading" style="display:none">
+              <span class="spinner"></span> Enviando...
+            </span>
+          </button>
+
+        </form>
+      </div>
+
+      <!-- ── INFO LATERAL ── -->
+      <div class="reserva-info-panel">
+
+        <div class="info-card">
+          <div class="info-card-icon">⏰</div>
+          <h3>Horario</h3>
+          <p>Martes a Domingo</p>
+          <strong>12:00 PM – 8:00 PM</strong>
+          <p class="info-note">Lunes cerrado</p>
+        </div>
+
+        <div class="info-card">
+          <div class="info-card-icon">📍</div>
+          <h3>Ubicación</h3>
+          <p>Vía Volcán, justo arriba<br/>de Arte Cruz, Chiriquí</p>
+          <a href="https://maps.google.com/?q=Via+Volcan,+Arte+Cruz,+Chiriquí,+Panamá"
+             target="_blank" rel="noopener" class="info-link">Ver en Google Maps →</a>
+        </div>
+
+        <div class="info-card">
+          <div class="info-card-icon">📱</div>
+          <h3>¿Prefieres WhatsApp?</h3>
+          <p>Escríbenos directamente y te respondemos al instante.</p>
+          <a href="https://wa.me/50760000000?text=Hola%2C%20quiero%20hacer%20una%20reservaci%C3%B3n"
+             target="_blank" rel="noopener" class="btn-whatsapp-sm">
+            WhatsApp Directo
+          </a>
+        </div>
+
+        <div class="info-card politics">
+          <h3>📋 Política de Reservaciones</h3>
+          <ul>
+            <li>✅ Confirmación en menos de 2 horas</li>
+            <li>✅ Grupos grandes requieren reserva previa</li>
+            <li>⚠️ Cancela con 2+ horas de anticipación</li>
+            <li>⚠️ Mesa reservada por 15 min después de la hora</li>
+          </ul>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- WhatsApp flotante -->
+  <a href="https://wa.me/50760000000?text=Hola%2C%20quiero%20información%20sobre%20Toro%20Sentao"
+     class="wa-float" target="_blank" rel="noopener" aria-label="WhatsApp">
+    <svg viewBox="0 0 24 24" fill="currentColor">
+      <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347zM12 0C5.373 0 0 5.373 0 12c0 2.126.553 4.122 1.523 5.86L0 24l6.29-1.5A11.94 11.94 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.818c-1.9 0-3.68-.51-5.21-1.4l-.374-.222-3.736.892.938-3.625-.244-.384A9.82 9.82 0 012.18 12c0-5.418 4.403-9.818 9.82-9.818 5.418 0 9.818 4.4 9.818 9.818S17.418 21.818 12 21.818z"/>
+    </svg>
+  </a>
+
+  <script src="js/data.js"></script>
+  <script src="js/reservaciones.js"></script>
+  <script src="js/main.js"></script>
+</body>
+</html>
